@@ -1,5 +1,3 @@
-
-
 def deep_update(base_dict: dict, update_With: dict) -> dict:
     for key, value in update_With.items():
         if isinstance(value, dict):
