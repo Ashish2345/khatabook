@@ -1,5 +1,5 @@
-from core.core.utils.settings import get_settings_from_environment
-from khatabook_v1.core.core.utils.collections_utl import deep_update
+from utils.collections_utl import deep_update
+from utils.settings_utl import get_settings_from_environment
 
 # globals() is the dictionary of global variables
 deep_update(

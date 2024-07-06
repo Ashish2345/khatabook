@@ -11,21 +11,25 @@ install-pre-commit:
 lint:
 	poetry run pre-commit run --all-files --verbose
 
+.PHONY: shell
+shell:
+	poetry run python khata_core/manage.py shell
+
 .PHONY: migrate
 migrate:
-	poetry run python -m core.manage migrate
+	poetry run python khata_core/manage.py migrate
 
 .PHONY: migrations
 migrations:
-	poetry run python -m core.manage makemigrations
+	poetry run python khata_core/manage.py makemigrations
 
 .PHONY: run-server
 run-server:
-	poetry run python -m core.manage runserver
+	poetry run python khata_core/manage.py runserver
 
 .PHONY: superuser
 superuser:
-	poetry run python -m core.manage createsuperuser
+	poetry run python khata_core/manage.py createsuperuser
 
 .PHONY: update
 update: install migrations migrate;

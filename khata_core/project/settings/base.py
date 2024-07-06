@@ -1,10 +1,5 @@
-DEBUG = False
-
+DEBUG = True
 SECRET_KEY = NotImplemented
-
-ALLOWED_HOSTS = []
-
-# Application definition
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -13,6 +8,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # Apps
+    "income.apps.IncomeConfig",
+    "expenses.apps.ExpensesConfig",
 ]
 
 MIDDLEWARE = [
@@ -25,7 +23,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "core.config.urls"
+ROOT_URLCONF = "project.urls"
 
 TEMPLATES = [
     {
@@ -43,7 +41,8 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "core.config.wsgi.application"
+WSGI_APPLICATION = "project.wsgi.application"
+
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
@@ -51,9 +50,13 @@ WSGI_APPLICATION = "core.config.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": r"C:\\Users\\ACER\\Desktop\\compmay\\yugnatar\\khatabook\\khatabook_v1\\db.sqlite3",
+        "NAME": r"C:\\Users\\ACER\\Desktop\\compmay\\yugnatar\\khatabook\\khatabook_v1\\khata_core\\db.sqlite3",
     }
 }
+
+
+# Password validation
+# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -70,6 +73,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -80,6 +84,7 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 
 USE_TZ = True
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
