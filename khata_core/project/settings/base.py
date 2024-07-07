@@ -1,5 +1,8 @@
+import os
+
 DEBUG = True
 SECRET_KEY = NotImplemented
+BASE_DIR = NotImplemented
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -9,6 +12,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # Apps
+    "accounts.apps.AccountsConfig",
     "income.apps.IncomeConfig",
     "expenses.apps.ExpensesConfig",
 ]
@@ -28,7 +32,7 @@ ROOT_URLCONF = "project.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(os.path.dirname(BASE_DIR), "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -42,6 +46,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "project.wsgi.application"
+
+AUTH_USER_MODEL = "accounts.User"
 
 
 # Database
@@ -85,13 +91,11 @@ USE_I18N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
-
 STATIC_URL = "static/"
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
+STATICFILES_DIRS = [os.path.join(os.path.dirname(BASE_DIR), "static")]
+
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media/")
+MEDIA_URL = "/media/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

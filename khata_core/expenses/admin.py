@@ -17,15 +17,18 @@ class PaymentMethodAdmin(admin.ModelAdmin):
 
 @admin.register(Expense)
 class ExpenseAdmin(admin.ModelAdmin):
-    list_display = ("user", "category", "payment_method", "amount", "date")
-    list_filter = ("category", "payment_method", "date", "user")
+    list_display = ("category", "payment_method", "amount", "date")
+    list_filter = (
+        "category",
+        "payment_method",
+        "date",
+    )
     search_fields = ("description",)
 
 
 @admin.register(RecurringExpense)
 class RecurringExpenseAdmin(admin.ModelAdmin):
     list_display = (
-        "user",
         "category",
         "payment_method",
         "amount",
@@ -33,5 +36,5 @@ class RecurringExpenseAdmin(admin.ModelAdmin):
         "end_date",
         "frequency",
     )
-    list_filter = ("category", "payment_method", "frequency", "start_date", "user")
+    list_filter = ("category", "payment_method", "frequency", "start_date")
     search_fields = ("description",)

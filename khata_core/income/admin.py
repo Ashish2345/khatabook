@@ -11,8 +11,8 @@ class AssetCategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Asset)
 class AssetAdmin(admin.ModelAdmin):
-    list_display = ("user", "category", "name", "value", "purchase_date")
-    list_filter = ("category", "purchase_date", "user")
+    list_display = ("category", "name", "value", "purchase_date")
+    list_filter = ("category", "purchase_date")
     search_fields = ("name", "description")
 
 

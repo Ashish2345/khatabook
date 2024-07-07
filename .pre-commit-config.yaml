@@ -16,13 +16,6 @@ repos:
     -   id: no-commit-to-branch
         args: [--branch, develop, --branch, master]
 
--   repo: https://github.com/pycqa/isort
-    rev: 5.11.5
-    hooks:
-    -   id: isort
-        name: isort
-        exclude: ^site-pacakges/
-
 -   repo: https://github.com/asottile/pyupgrade
     rev: v2.26.0
     hooks:
