@@ -45,6 +45,7 @@ class Expense(AuditFields):
     category = models.ForeignKey(
         ExpenseCategory, on_delete=models.SET_NULL, null=True, related_name="expenses"
     )
+    name = models.CharField(("Name"), max_length=250, null=True, blank=True)
     payment_method = models.ForeignKey(
         PaymentMethod, on_delete=models.SET_NULL, null=True, related_name="expenses"
     )

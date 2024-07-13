@@ -1,8 +1,10 @@
 import os
+from pathlib import Path
 
 DEBUG = True
 SECRET_KEY = NotImplemented
-BASE_DIR = NotImplemented
+
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -15,6 +17,8 @@ INSTALLED_APPS = [
     "accounts.apps.AccountsConfig",
     "income.apps.IncomeConfig",
     "expenses.apps.ExpensesConfig",
+    # Third party apps
+    "crispy_forms",
 ]
 
 MIDDLEWARE = [
@@ -99,3 +103,5 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media/")
 MEDIA_URL = "/media/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"

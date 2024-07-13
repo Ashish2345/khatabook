@@ -1,3 +1,8 @@
-from django.shortcuts import render  # noqa: F401
+from django.views.generic import ListView
 
-# Create your views here.
+from .models import Expense
+
+
+class ExpenseListView(ListView):
+    model = Expense
+    template_name = "expenses/expenses_list.html"

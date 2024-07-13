@@ -4,8 +4,8 @@ from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.core import serializers
 
-from .encryption import _decrypt, _encrypt, _isEncrypted
-from .models import AuditTrail, User
+from .features.encryption import _decrypt, _encrypt, _isEncrypted
+from accounts.models import AuditTrail, User
 
 
 def get_client_ip(request):

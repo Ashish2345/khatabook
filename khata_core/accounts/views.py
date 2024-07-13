@@ -6,8 +6,8 @@ from django.shortcuts import redirect, render
 from django.views import View
 
 from .forms import LoginForm, PasswordChangeForm
-from .mixins import NonLoginRequiredMixin
-from .utils import store_audit
+from general.mixins import NonLoginRequiredMixin
+from general.utils import store_audit
 
 
 class LoginView(NonLoginRequiredMixin, View):
@@ -91,7 +91,7 @@ class PasswordChangeView(LoginRequiredMixin, View):
 
 class DashboardView(LoginRequiredMixin, View):
     def dispatch(self, request, *args, **kwargs):
-        self.template_name = "base/index.html"
+        self.template_name = "index.html"
         return super().dispatch(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
