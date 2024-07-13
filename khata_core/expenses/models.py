@@ -1,5 +1,6 @@
 from django.db import models
 from general.models import AuditFields
+from general.utils import get_ui_avatars
 
 
 class ExpenseCategory(AuditFields):
@@ -61,6 +62,9 @@ class Expense(AuditFields):
         return (
             f"{self.amount} - {self.category.name if self.category else 'No Category'}"
         )
+
+    def get_receipt_image(self):
+        return get_ui_avatars(self.name, self.name)
 
 
 class RecurringExpense(AuditFields):

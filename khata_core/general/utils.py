@@ -2,33 +2,8 @@ from random import randint
 
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
-from django.core import serializers
 
 from .features.encryption import _decrypt, _encrypt, _isEncrypted
-from accounts.models import AuditTrail, User
-
-
-def get_client_ip(request):
-    x_forwarded_for = request.META.get("HTTP_X_FORWARDED_FOR")
-    if x_forwarded_for:
-        ip = x_forwarded_for.split(",")[0]
-    else:
-        ip = request.META.get("REMOTE_ADDR")
-    return ip
-
-
-def store_audit(*, request, instance, action, previous_instance=None):
-    audit = AuditTrail()
-    audit.model_type = instance._meta.verbose_name.title()
-    audit.object_id = instance.pk
-    audit.object_str = str(instance)
-    audit.action = action
-    audit.user = request.user
-    audit.ip = get_client_ip(request)
-    audit.instance = serializers.serialize("json", [instance])
-    if previous_instance:
-        audit.previous_instance = serializers.serialize("json", [previous_instance])
-    audit.save()
 
 
 class OTPEncryptionDec:
@@ -61,8 +36,21 @@ class TokenEncodeDecode:
         try:
             uid = urlsafe_base64_decode(uid)
             uid = uid.decode("utf-8")  # Decode bytes to str using utf-8
-            user = User.objects.get(uuid=uid)
+            user = uid.objects.get(uuid=uid)
             if default_token_generator.check_token(user, token):
                 return {"user": user}
         except Exception as e:
             print(e)
+
+
+def get_ui_avatars(first_name, last_name):
+    base_url = "https://ui-avatars.com/api/"
+    params = (
+        f"?background=0D8ABC"
+        f"&color=fff"
+        f"&name={first_name}+{last_name}"
+        f"&size=256"
+        f"&format=png"
+    )
+    url = base_url + params
+    return url

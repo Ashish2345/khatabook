@@ -67,42 +67,46 @@
                         <th>Date</th>
                         <th>Paid Amount</th>
                         <th>Payment Method</th>
+                        <th>Action</th>
 
                     </tr>
                     </thead>
 
 
                     <tbody>
-                        {% for team_lists in team_lists %}
+                        {% for expense in object_list %}
                     <tr>
                         <td>
-                            <a href="{{team_lists.user_image.url}}">
-                            <img src="{{team_lists.user_image.url}}" alt="" class="avatar-md h-auto d-block rounded" style="margin: auto">
+                            <a href="{{expense.get_receipt_image}}">
+                            <img src="{{expense.get_receipt_image}}" alt="" class="avatar-md h-auto d-block rounded" style="margin: auto">
                             </a>
                         </td>
                         <td>
                             <a>
-                            {{team_lists.full_name}}</td>
+                            {{expense.category}}</td>
 
                             </a>
 
-                        <td>{{team_lists.designation}}</td>
+                        <td>{{expense.name}}</td>
+                        <td>{{expense.date}}</td>
+                        <td>{{expense.amount}}</td>
+                        <td>{{expense.payment_method}}</td>
                         <td>
                             <ul class="list-unstyled hstack gap-1 mb-0">
 
                                 <li data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Edit">
-                                    <a href="{% url 'backend_dashboard:teams_details' team_lists.id %}" class="btn btn-sm btn-soft-info"><i class="mdi mdi-pencil-outline"></i></a>
+                                    <a href="" class="btn btn-sm btn-soft-info"><i class="mdi mdi-pencil-outline"></i></a>
                                 </li>
                                 <li data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Delete">
-                                    <a href="" data-bs-toggle="modal" data-bs-target=".UserDeleteModal{{team_lists.id}}"  class="btn btn-sm btn-soft-danger"><i class="mdi mdi-delete-outline"></i></a>
+                                    <a href="" data-bs-toggle="modal" data-bs-target=".UserDeleteModal{{expense.id}}"  class="btn btn-sm btn-soft-danger"><i class="mdi mdi-delete-outline"></i></a>
                                 </li>
 
 
-                                <div class="modal fade UserDeleteModal{{team_lists.id}}" tabindex="-1" aria-labelledby="jobDeleteLabel" aria-modal="true" role="dialog">
+                                <div class="modal fade UserDeleteModal{{expense.id}}" tabindex="-1" aria-labelledby="jobDeleteLabel" aria-modal="true" role="dialog">
                                     <div class="modal-dialog modal-dialog-centered modal-sm">
                                         <div class="modal-content">
                                             <div class="modal-body px-4 py-5 text-center">
-                                                <form method="POST" enctype='multipart/form-data' action="{% url 'backend_dashboard:teams_delete' team_lists.id %}">
+                                                <form method="POST" enctype='multipart/form-data' action="">
                                                 {% csrf_token %}
                                                     <button type="button" class="btn-close position-absolute end-0 top-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 <div class="avatar-sm mb-4 mx-auto">
@@ -130,7 +134,20 @@
                     </tr>
 
 
+
+
                     {% endfor %}
+
+
+                    <tr>
+                        <td colspan="6">
+                            Grand Total
+                        </td>
+                        <td>
+                            {{total_expenses}} {{top_stats}}
+                        </td>
+
+                    </tr>
 
 
 

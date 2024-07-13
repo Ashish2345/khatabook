@@ -8,6 +8,8 @@ from django.contrib.auth.models import (
 from django.db import models
 from django.utils import timezone
 
+from general.utils import get_ui_avatars
+
 
 class SoftDeletionManager(models.Manager):
     def __init__(self, *args, **kwargs):
@@ -117,16 +119,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         return f"{self.first_name} {self.last_name}"
 
     def get_avatar(self):
-        base_url = "https://ui-avatars.com/api/"
-        params = (
-            f"?background=0D8ABC"
-            f"&color=fff"
-            f"&name={self.first_name}+{self.last_name}"
-            f"&size=256"
-            f"&format=png"
-        )
-        url = base_url + params
-        return url
+        return get_ui_avatars(self.first_name, self.last_name)
 
     def __str__(self):
         return str(self.username)
