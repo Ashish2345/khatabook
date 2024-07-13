@@ -33,3 +33,9 @@ superuser:
 
 .PHONY: update
 update: install migrations migrate;
+
+.PHONY: gitall
+gitall:
+	git add .
+	git commit -m "$(m)"
+	git push
